@@ -1,0 +1,25 @@
+@startuml
+class org.eaetirk.efd.lead.exception.ApplicationExceptionMapper {
++ Response toResponse(LeadAPIException)
+- ErrorResponse mapAPIExceptionToErrorResponse(LeadAPIException)
+}
+
+class org.eaetirk.efd.lead.exception.ErrorResponse {
+- String message
+- String reason
+- String operation
+- String code
+}
+
+class org.eaetirk.efd.lead.exception.LeadAPIException {
+- String code
+- String reason
+- String operation
+- Response.Status httpStatus
+}
+
+
+
+jakarta.ws.rs.ext.ExceptionMapper <|.. org.eaetirk.efd.lead.exception.ApplicationExceptionMapper
+org.eaetirk.efd.lead.exception.RuntimeException <|-- org.eaetirk.efd.lead.exception.LeadAPIException
+@enduml

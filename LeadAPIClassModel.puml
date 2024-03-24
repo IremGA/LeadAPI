@@ -1,0 +1,131 @@
+@startuml
+class org.eaetirk.efd.lead.model.LeadDeviceSpecification {
+- Lead lead
+- Long id
+- LeadDeviceSpecificationType leadDeviceSpecificationType
+- String comment
+- SpecificationPriority specificationPriority
+- Instant updatedAt
+}
+
+class org.eaetirk.efd.lead.model.Car {
+~ Long id
+~ BigInteger kilometer
+}
+
+enum org.eaetirk.efd.lead.model.OfferStatus {
++  ACTIVE
++  ACCEPTED_BY_LEAD
++  REJECTED_BY_LEAD
++  WAITING
++  INACTIVE
+- String abbreviation
++ String getAbbreviation()
+}
+
+
+class org.eaetirk.efd.lead.model.Device {
+~ Long id
+~ String model
+~ String brand
+~ String creation_year
+~ String style
+~ String location
+}
+
+enum org.eaetirk.efd.lead.model.LeadDeviceSpecificationType {
++  TRANSMISSION
++  TRIM
++  TIRE
+- String abbreviation
++ String getAbbreviation()
+}
+
+
+class org.eaetirk.efd.lead.model.Lead {
+- Long id
+- String firstName
+- String lastName
+- String occupation
+- String email
+- PaymentPlan paymentPlan
+- Instant createdAt
+- Instant respondBefore
+- LeadStatus leadStatus
+- String comment
+- List<LeadOffer> leadOfferList
+- List<LeadDeviceSpecification> leadDeviceSpecificationList
++ void setLeadOfferList(List<LeadOffer>)
++ void setLeadDeviceSpecificationList(List<LeadDeviceSpecification>)
++ void addLeadDeviceSpecification(LeadDeviceSpecification)
++ void addLeadOffer(LeadOffer)
+}
+
+
+enum org.eaetirk.efd.lead.model.SpecificationPriority {
++  MUST_HAVE
++  NICE_TO_HAVE
+- String abbreviation
++ String getAbbreviation()
+}
+
+
+class org.eaetirk.efd.lead.model.LeadOffer {
+- Lead lead
+- Long id
+- Car car
+- Instant createdAt
+- OfferStatus offerStatus
+- BigDecimal priceAmount
+- Currency currency
+- Money offerPrice
+}
+
+enum org.eaetirk.efd.lead.model.PaymentPlan {
++  BANK_TRANSFER
++  CASH
++  BUY_NOW_PAY_LATER_COMPANY
++  BUY_NOW_PAY_LATER_BANK
+- String abbreviation
++ String getAbbreviation()
+}
+
+
+class org.eaetirk.efd.lead.model.Money {
+- BigDecimal amount
+- Currency currency
++ BigDecimal getAmount()
++ Currency getCurrency()
++ Money add(Money)
++ Money subtract(Money)
++ Money multiply(BigDecimal)
++ Money divide(BigDecimal)
++ String toString()
+}
+
+
+enum org.eaetirk.efd.lead.model.LeadStatus {
++  ACTIVE
++  OFFER_READY
++  OFFER_SENT_TO_LEAD
++  FAILED
++  SUSPENDED
++  INACTIVE
+- String abbreviation
++ String getAbbreviation()
+}
+
+
+enum org.eaetirk.efd.lead.model.Currency {
++  USD
++  EUR
++  GBP
+- String abbreviation
++ String getAbbreviation()
+}
+
+
+
+
+org.eaetirk.efd.lead.model.Device <|-- org.eaetirk.efd.lead.model.Car
+@enduml
