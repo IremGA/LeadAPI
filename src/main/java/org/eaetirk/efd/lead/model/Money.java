@@ -1,8 +1,5 @@
 package org.eaetirk.efd.lead.model;
 
-
-import lombok.Getter;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
