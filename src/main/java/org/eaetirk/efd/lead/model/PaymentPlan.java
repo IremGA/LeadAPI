@@ -13,7 +13,7 @@ public enum PaymentPlan {
 
     private final String abbreviation;
 
-    private PaymentPlan(String abbreviation) {
+    PaymentPlan(String abbreviation) {
         this.abbreviation = abbreviation;
     }
 

@@ -11,7 +11,7 @@ public enum LeadDeviceSpecificationType {
 
     private final String abbreviation;
 
-    private LeadDeviceSpecificationType(String abbreviation) {
+    LeadDeviceSpecificationType(String abbreviation) {
         this.abbreviation = abbreviation;
     }
 
