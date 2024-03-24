@@ -1,5 +1,8 @@
 package org.eaetirk.efd.lead.model;
 
+import lombok.Getter;
+
+@Getter
 public enum LeadDeviceSpecificationType {
 
     TRANSMISSION("Transmission"),
@@ -12,7 +15,4 @@ public enum LeadDeviceSpecificationType {
         this.abbreviation = abbreviation;
     }
 
-    public String getAbbreviation() {
-        return abbreviation;
-    }
 }

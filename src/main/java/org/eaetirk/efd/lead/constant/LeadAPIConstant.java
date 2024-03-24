@@ -4,7 +4,6 @@ public class LeadAPIConstant {
 
     public static final String UPDATE_LEAD_OPERATION = "Update Lead";
     public static final String CREATE_LEAD_OPERATION = "Create Lead";
-    public static final String DELETE_LEAD_OPERATION = "Delete Lead";
     public static final String GET_LEAD_OPERATION = "Get Lead";
     public static final String ERROR_WHILE_UPDATE_LEAD = "Error while updating Lead";
     public static final String ERROR_LEAD_ID_MISSING = "Lead ID is missing";

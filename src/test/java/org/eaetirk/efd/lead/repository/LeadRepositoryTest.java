@@ -24,7 +24,7 @@ public class LeadRepositoryTest {
 
     @Test
     @TestTransaction
-    public void shouldCreateAndFindAndCountPersistedOnceLeadWithEmptyRelations() throws SQLException {
+    public void shouldCreateAndFindAndCountPersistedOnceLeadWithEmptyRelations(){
 
         Instant now = Instant.now();
         Instant threeDaysLater = now.plus(3, java.time.temporal.ChronoUnit.DAYS);
@@ -50,7 +50,7 @@ public class LeadRepositoryTest {
 
     @Test
     @TestTransaction
-    public void shouldCreateAndFindLead() throws SQLException {
+    public void shouldCreateAndFindLead()  {
 
         Instant now = Instant.now();
         Instant threeDaysLater = now.plus(3, java.time.temporal.ChronoUnit.DAYS);
@@ -71,7 +71,7 @@ public class LeadRepositoryTest {
 
     @Test
     @TestTransaction
-    public void shouldFindLeadByFirstName() throws SQLException {
+    public void shouldFindLeadByFirstName() {
 
         Instant now = Instant.now();
         Instant threeDaysLater = now.plus(3, java.time.temporal.ChronoUnit.DAYS);
@@ -111,7 +111,6 @@ public class LeadRepositoryTest {
         Car car = new Car("BMW_X5_1235643f34", "BMW X5 AUTO", "2018", "Sport" ,"Jankomir", new BigInteger("1234"));
         LeadOffer leadOffer = new LeadOffer(OfferStatus.ACTIVE, new BigDecimal(39000), Currency.EUR);
         leadOffer.setCar(car);
-        List<LeadOffer> leadOfferList = List.of(leadOffer);
         LeadDeviceSpecification leadDeviceSpecification = new LeadDeviceSpecification(null, null, LeadDeviceSpecificationType.TRANSMISSION, "Manuel", SpecificationPriority.MUST_HAVE, Instant.now());
         Lead lead = new Lead("Irem", "Aktas", "SW_Engineer", "iremgamzeli@gmail.com", PaymentPlan.BANK_TRANSFER, threeDaysLater,LeadStatus.ACTIVE,"new Lead Created");
         lead.addLeadOffer(leadOffer);

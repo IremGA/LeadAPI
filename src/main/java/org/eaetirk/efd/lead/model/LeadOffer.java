@@ -1,6 +1,5 @@
 package org.eaetirk.efd.lead.model;
 
-import jakarta.json.bind.annotation.JsonbDateFormat;
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

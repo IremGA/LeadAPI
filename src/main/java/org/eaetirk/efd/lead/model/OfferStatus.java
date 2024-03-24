@@ -1,5 +1,8 @@
 package org.eaetirk.efd.lead.model;
 
+import lombok.Getter;
+
+@Getter
 public enum OfferStatus {
 
     ACTIVE("Act"),
@@ -11,11 +14,8 @@ public enum OfferStatus {
 
     private final String abbreviation;
 
-    private OfferStatus(String abbreviation) {
+    OfferStatus(String abbreviation) {
         this.abbreviation = abbreviation;
     }
 
-    public String getAbbreviation() {
-        return abbreviation;
-    }
 }

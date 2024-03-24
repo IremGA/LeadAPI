@@ -18,7 +18,7 @@ import static org.hamcrest.CoreMatchers.*;
 public class LeadResourceTest {
     @Test
     @Order(1)
-    public void testCreateLead() throws Exception {
+    public void testCreateLead() {
 
         given()
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)

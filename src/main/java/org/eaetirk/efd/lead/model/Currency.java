@@ -1,5 +1,8 @@
 package org.eaetirk.efd.lead.model;
 
+import lombok.Getter;
+
+@Getter
 public enum Currency {
 
     USD("USD"),
@@ -8,11 +11,8 @@ public enum Currency {
 
     private final String abbreviation;
 
-    private Currency(String abbreviation) {
+    Currency(String abbreviation) {
         this.abbreviation = abbreviation;
     }
 
-    public String getAbbreviation() {
-        return abbreviation;
-    }
 }

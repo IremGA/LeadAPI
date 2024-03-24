@@ -2,10 +2,11 @@ package org.eaetirk.efd.lead.exception;
 
 import jakarta.ws.rs.core.Response;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 public class LeadAPIException extends RuntimeException {
 

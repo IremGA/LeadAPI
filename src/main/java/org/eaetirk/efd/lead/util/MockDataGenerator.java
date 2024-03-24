@@ -8,7 +8,7 @@ import java.math.BigInteger;
 import java.time.Instant;
 
 public class MockDataGenerator {
-        private Faker faker;
+        private final Faker faker;
 
         public MockDataGenerator() {
             faker = new Faker();

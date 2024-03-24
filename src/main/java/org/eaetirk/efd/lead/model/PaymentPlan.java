@@ -1,5 +1,8 @@
 package org.eaetirk.efd.lead.model;
 
+import lombok.Getter;
+
+@Getter
 public enum PaymentPlan {
 
     BANK_TRANSFER("BT"),
@@ -14,7 +17,4 @@ public enum PaymentPlan {
         this.abbreviation = abbreviation;
     }
 
-    public String getAbbreviation() {
-        return abbreviation;
-    }
 }

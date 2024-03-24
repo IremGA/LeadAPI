@@ -57,7 +57,7 @@ public class LeadResource {
             description = "This API returns a Lead with specified ID in the request path. " +
                     "When there is no data found with that ID, returns NotFound as a response."
     )
-    @Retry(maxRetries = 3, delay = 5000)
+    @Retry(maxRetries = 4, delay = 5000)
     public Response findLeadById(@PathParam("id") Long id){
         LOG.info("GET Lead Operation is Called");
         try{
@@ -107,7 +107,7 @@ public class LeadResource {
             summary = "Creates a Lead"
     )
     @APIResponse(responseCode = "201", description = "Lead created successfully")
-    @Retry(maxRetries = 3, delay = 5000)
+    @Retry(maxRetries = 4, delay = 5000)
     @Fallback(fallbackMethod = "createLeadFallBack")
     public Response createLead(Lead lead, @Context UriInfo uriInfo){
         try{
@@ -135,7 +135,7 @@ public class LeadResource {
             summary = "Updates a Lead"
     )
     @APIResponse(responseCode = "200", description = "Lead updated successfully")
-    @Retry(maxRetries = 3, delay = 5000)
+    @Retry(maxRetries = 4, delay = 5000)
     @Fallback(fallbackMethod = "updateLeadFallBack")
     @Path("/{id}")
     public Response updateLead(@PathParam("id") Long id,Lead lead){
@@ -207,8 +207,8 @@ public class LeadResource {
 
     private void saveFailedRequest(Lead lead, String fileName) {
 
-        String leadJSON = JsonbBuilder.create().toJson(lead);
         try {
+            String leadJSON = JsonbBuilder.create().toJson(lead);
             PrintWriter out = new PrintWriter(fileName + Instant.now().toEpochMilli()+".json");
             out.println(leadJSON);
         } catch (FileNotFoundException e) {

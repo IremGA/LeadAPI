@@ -1,40 +1,27 @@
 package org.eaetirk.efd.lead.model;
 
 
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 
-public class Money {
-    private BigDecimal amount;
-    private Currency currency;
+public record Money(BigDecimal amount, Currency currency) {
 
-
-    public Money(BigDecimal amount, Currency currency) {
-        this.amount = amount;
-        this.currency = currency;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
     public Money add(Money money) {
-        if (!this.currency.equals(money.getCurrency())) {
+        if (!this.currency.equals(money.currency())) {
             throw new IllegalArgumentException("Currencies don't match.");
         }
-        BigDecimal result = this.amount.add(money.getAmount());
+        BigDecimal result = this.amount.add(money.amount());
         return new Money(result, this.currency);
     }
 
     public Money subtract(Money money) {
-        if (!this.currency.equals(money.getCurrency())) {
+        if (!this.currency.equals(money.currency())) {
             throw new IllegalArgumentException("Currencies don't match.");
         }
-        BigDecimal result = this.amount.subtract(money.getAmount());
+        BigDecimal result = this.amount.subtract(money.amount());
         return new Money(result, this.currency);
     }
 

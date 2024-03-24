@@ -91,9 +91,7 @@ public class Lead {
             leadOfferList =new ArrayList<>();
         }
         this.leadOfferList = leadOfferList;
-        leadOfferList.forEach(leadOffer -> {
-            leadOffer.setLead(this);
-        });
+        leadOfferList.forEach(leadOffer -> leadOffer.setLead(this));
     }
 
     public void setLeadDeviceSpecificationList(List<LeadDeviceSpecification> leadDeviceSpecificationList) {
@@ -101,9 +99,7 @@ public class Lead {
             leadDeviceSpecificationList = new ArrayList<>();
         }
         this.leadDeviceSpecificationList =leadDeviceSpecificationList;
-        leadDeviceSpecificationList.forEach(leadDeviceSpecification -> {
-            leadDeviceSpecification.setLead(this);
-        });
+        leadDeviceSpecificationList.forEach(leadDeviceSpecification -> leadDeviceSpecification.setLead(this));
     }
 
     public void addLeadDeviceSpecification(LeadDeviceSpecification leadDeviceSpecification){

@@ -1,5 +1,8 @@
 package org.eaetirk.efd.lead.model;
 
+import lombok.Getter;
+
+@Getter
 public enum SpecificationPriority {
 
     MUST_HAVE("MH"),
@@ -8,11 +11,8 @@ public enum SpecificationPriority {
 
     private final String abbreviation;
 
-    private SpecificationPriority(String abbreviation) {
+    SpecificationPriority(String abbreviation) {
         this.abbreviation = abbreviation;
     }
 
-    public String getAbbreviation() {
-        return abbreviation;
-    }
 }
