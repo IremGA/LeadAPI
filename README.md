@@ -1,5 +1,9 @@
 # efd.task.lead
 
+In Low Level design document you can find entity model diagram, class diagram and technology stack. File Name : Low Level Design for Lead API.pdf
+Related Postman Collection is added in the project with file name : EFD_LEAD.postman_collection.json
+
+# LEAD API
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
