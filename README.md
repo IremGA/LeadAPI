@@ -1,6 +1,6 @@
 # efd.task.lead
 
-In "Low Level Design for Lead API.pdf" you can find entity model diagram, class diagram and technology stack.
+In "Low Level Design for Lead API.pdf" you can find entity model diagram, class diagram and api technology stack.
 
 Postman Collection is added in the project with file name : EFD_LEAD.postman_collection.json
 
