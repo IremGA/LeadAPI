@@ -45,13 +45,12 @@ public class LeadOffer {
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private Currency currency;
-    //I don't want to make a seperate column for the price
-    @Transient
-    private Money offerPrice;
 
     public LeadOffer(OfferStatus offerStatus, BigDecimal priceAmount, Currency currency) {
         this.offerStatus = offerStatus;
         this.priceAmount = priceAmount;
         this.currency = currency;
     }
+
+
 }

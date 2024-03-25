@@ -2,10 +2,7 @@ package org.eaetirk.efd.lead.util;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eaetirk.efd.lead.exception.LeadAPIException;
-import org.eaetirk.efd.lead.model.Car;
-import org.eaetirk.efd.lead.model.Lead;
-import org.eaetirk.efd.lead.model.LeadDeviceSpecification;
-import org.eaetirk.efd.lead.model.LeadOffer;
+import org.eaetirk.efd.lead.model.*;
 
 @ApplicationScoped
 public class EntityMapper {
@@ -47,11 +44,9 @@ public class EntityMapper {
 
     private void applyLeadOfferPatch(LeadOffer existingEntity, LeadOffer patchedEntity) {
 
-        if(patchedEntity.getOfferPrice()!= null && !patchedEntity.getOfferPrice().equals(existingEntity.getOfferPrice())){
-            existingEntity.setOfferPrice(patchedEntity.getOfferPrice());
-        }
         if(patchedEntity.getPriceAmount()!= null && !patchedEntity.getPriceAmount().equals(existingEntity.getPriceAmount())){
             existingEntity.setPriceAmount(patchedEntity.getPriceAmount());
+
         }
         if(patchedEntity.getCar()!= null && !patchedEntity.getCar().equals(existingEntity.getCar())){
             mapPatchedCarToExistingCar(patchedEntity, existingEntity);
@@ -117,17 +112,4 @@ public class EntityMapper {
         }
     }
 
-    public boolean patchedLeadHasLeadOffer(Lead existingLead, Lead patchedLead){
-        if( patchedLead.getLeadOfferList() != null ){
-            return !patchedLead.getLeadOfferList().equals(existingLead.getLeadOfferList());
-        }
-        return false;
-    }
-
-    public boolean patchedLeadHasLeadDeviceSpec(Lead existingLead, Lead patchedLead){
-        if( patchedLead.getLeadDeviceSpecificationList() != null ){
-            return !patchedLead.getLeadDeviceSpecificationList().equals(existingLead.getLeadDeviceSpecificationList());
-        }
-        return false;
-    }
 }
