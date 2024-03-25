@@ -29,5 +29,4 @@ public class Device {
         this.style = style;
         this.location =location;
     }
-
 }
