@@ -31,7 +31,9 @@ public class LeadResourceTest {
                 .body("comment", is("new About to be Created"))
                 .body("first_name", is("Irem"))
                 .body("leadDeviceSpecificationList.leadDeviceSpecificationType", notNullValue())
-                .body("leadOfferList.car.brand", notNullValue())
+                .body("leadOfferList.car.brand", notNullValue()).body("leadOfferList.car.model", hasItem("BMW_X5"))
+                .body("leadDeviceSpecificationList.comment", hasItem("Leather"))
+                .body("leadOfferList.car.brand", hasItem("BMW"))
                 .body("leadStatus",  notNullValue());
 
     }

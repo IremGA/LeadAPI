@@ -93,13 +93,21 @@ public class DefaultLeadService implements LeadService{
             //update lead device specification
             updateLeadDeviceSpecification(lead,persistedLead);
         }catch (LeadAPIException leadAPIException){
-            LOG.info("Error occurred ", leadAPIException.getMessage(), leadAPIException);
-            entityManager.getTransaction().rollback();
-            throw leadAPIException;
+            LOG.error("Error occurred ", leadAPIException.getMessage(), leadAPIException);
+            try{
+                entityManager.getTransaction().rollback();
+            }catch(Exception exception){
+                LOG.error("Exception Thrown in Rollback Transaction", exception.getMessage(), exception);
+                throw leadAPIException;
+            }
         } catch (Exception e){
-            LOG.info("Error occurred ", e.getMessage(), e);
-            entityManager.getTransaction().rollback();
-            throw new LeadAPIException(Response.Status.INTERNAL_SERVER_ERROR.toString(),LeadAPIConstant.ERROR_WHILE_UPDATE_LEAD, e.getMessage(), LeadAPIConstant.UPDATE_LEAD_OPERATION, Response.Status.INTERNAL_SERVER_ERROR);
+            LOG.error("Error occurred ", e.getMessage(), e);
+            try{
+                entityManager.getTransaction().rollback();
+            }catch (Exception exception){
+                LOG.error("Exception Thrown in Rollback Transaction", exception.getMessage(), exception);
+                throw new LeadAPIException(Response.Status.INTERNAL_SERVER_ERROR.toString(),LeadAPIConstant.ERROR_WHILE_UPDATE_LEAD, e.getMessage(), LeadAPIConstant.UPDATE_LEAD_OPERATION, Response.Status.INTERNAL_SERVER_ERROR);
+            }
         }
     }
 
