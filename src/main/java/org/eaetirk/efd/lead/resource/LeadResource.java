@@ -64,10 +64,10 @@ public class LeadResource {
             Lead lead = leadService.findLeadById(id);
             return Response.ok(lead).build();
         }catch(LeadAPIException apiException){
-            LOG.info("Error occurred: {} ", apiException.getMessage(), apiException);
+            LOG.error("Error occurred: {} ", apiException.getMessage(), apiException);
             return applicationExceptionMapper.toResponse(apiException);
         }catch(NotFoundException notFoundException){
-            LOG.info("Lead not found: {} ", notFoundException.getMessage(), notFoundException);
+            LOG.error("Lead not found: {} ", notFoundException.getMessage(), notFoundException);
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("Lead Not Found with message : " + notFoundException.getMessage())
                     .build();
@@ -118,12 +118,12 @@ public class LeadResource {
             return Response.created(uriBuilder.build()).entity(persistedLead).build();
         }catch (PropertyValueException valueException){
             LeadAPIException leadAPIException = new LeadAPIException(Response.Status.BAD_REQUEST.toString(), "Invalid Request Value","Invalid Request Json",LeadAPIConstant.CREATE_LEAD_OPERATION, Response.Status.BAD_REQUEST);
-            LOG.info("Error occurred ", LeadAPIConstant.CREATE_LEAD_OPERATION,valueException);
+            LOG.error("Error occurred ", LeadAPIConstant.CREATE_LEAD_OPERATION,valueException);
             return applicationExceptionMapper.toResponse(leadAPIException);
         }
         catch (Exception e){
             LeadAPIException leadAPIException = new LeadAPIException(e.getMessage(), LeadAPIConstant.CREATE_LEAD_OPERATION);
-            LOG.info("Error occurred ", LeadAPIConstant.CREATE_LEAD_OPERATION,e);
+            LOG.error("Error occurred ", LeadAPIConstant.CREATE_LEAD_OPERATION,e);
             return applicationExceptionMapper.toResponse(leadAPIException);
         }
 
@@ -148,12 +148,12 @@ public class LeadResource {
             LOG.info("Error occurred ", leadAPIException.getMessage(), leadAPIException);
             return applicationExceptionMapper.toResponse(leadAPIException);
         }catch (NotFoundException notFoundException){
-            LOG.info("Error occurred  ", notFoundException.getMessage(), notFoundException);
+            LOG.error("Error occurred  ", notFoundException.getMessage(), notFoundException);
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("Lead Not Found with message : " + notFoundException.getMessage())
                     .build();
         }catch(Exception e){
-            LOG.info("Error occurred ", e.getMessage(), e);
+            LOG.error("Error occurred ", e.getMessage(), e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity(e.getMessage())
                     .build();
@@ -183,7 +183,7 @@ public class LeadResource {
             return applicationExceptionMapper.toResponse(leadAPIException);
         } catch (Exception e) {
             LeadAPIException leadAPIException = new LeadAPIException(e.getMessage(), LeadAPIConstant.CREATE_FALLBACK_OPERATION );
-            LOG.infof("Error occurred ", LeadAPIConstant.CREATE_FALLBACK_OPERATION, e.getMessage());
+            LOG.error("Error occurred ", LeadAPIConstant.CREATE_FALLBACK_OPERATION, e);
             return applicationExceptionMapper.toResponse(leadAPIException);
         }
     }
@@ -197,7 +197,7 @@ public class LeadResource {
             LeadAPIException leadAPIException = new LeadAPIException("UpdateLead Operation Failed, Request is saved to be run later", LeadAPIConstant.UPDATE_FALLBACK_OPERATION );
             return applicationExceptionMapper.toResponse(leadAPIException);
         }catch(Exception e){
-            LOG.infof("Error occurred ", e.getMessage());
+            LOG.error("Error occurred ", e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity(e.getMessage())
                     .build();
@@ -212,6 +212,7 @@ public class LeadResource {
             PrintWriter out = new PrintWriter(fileName + Instant.now().toEpochMilli()+".json");
             out.println(leadJSON);
         } catch (FileNotFoundException e) {
+            LOG.error("Error occurred while saving Request File", e);
             throw new RuntimeException(e);
         }
     }

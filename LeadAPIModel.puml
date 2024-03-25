@@ -20,9 +20,7 @@ enum org.eaetirk.efd.lead.model.OfferStatus {
 +  WAITING
 +  INACTIVE
 - String abbreviation
-+ String getAbbreviation()
 }
-
 
 class org.eaetirk.efd.lead.model.Device {
 ~ Long id
@@ -38,9 +36,7 @@ enum org.eaetirk.efd.lead.model.LeadDeviceSpecificationType {
 +  TRIM
 +  TIRE
 - String abbreviation
-+ String getAbbreviation()
 }
-
 
 class org.eaetirk.efd.lead.model.Lead {
 - Long id
@@ -62,47 +58,13 @@ class org.eaetirk.efd.lead.model.Lead {
 }
 
 
-enum org.eaetirk.efd.lead.model.SpecificationPriority {
-+  MUST_HAVE
-+  NICE_TO_HAVE
-- String abbreviation
-+ String getAbbreviation()
-}
-
-
-class org.eaetirk.efd.lead.model.LeadOffer {
-- Lead lead
-- Long id
-- Car car
-- Instant createdAt
-- OfferStatus offerStatus
-- BigDecimal priceAmount
-- Currency currency
-- Money offerPrice
-}
-
 enum org.eaetirk.efd.lead.model.PaymentPlan {
 +  BANK_TRANSFER
 +  CASH
 +  BUY_NOW_PAY_LATER_COMPANY
 +  BUY_NOW_PAY_LATER_BANK
 - String abbreviation
-+ String getAbbreviation()
 }
-
-
-class org.eaetirk.efd.lead.model.Money {
-- BigDecimal amount
-- Currency currency
-+ BigDecimal getAmount()
-+ Currency getCurrency()
-+ Money add(Money)
-+ Money subtract(Money)
-+ Money multiply(BigDecimal)
-+ Money divide(BigDecimal)
-+ String toString()
-}
-
 
 enum org.eaetirk.efd.lead.model.LeadStatus {
 +  ACTIVE
@@ -112,18 +74,30 @@ enum org.eaetirk.efd.lead.model.LeadStatus {
 +  SUSPENDED
 +  INACTIVE
 - String abbreviation
-+ String getAbbreviation()
 }
 
+enum org.eaetirk.efd.lead.model.SpecificationPriority {
++  MUST_HAVE
++  NICE_TO_HAVE
+- String abbreviation
+}
+
+class org.eaetirk.efd.lead.model.LeadOffer {
+- Lead lead
+- Long id
+- Car car
+- Instant createdAt
+- OfferStatus offerStatus
+- BigDecimal priceAmount
+- Currency currency
+}
 
 enum org.eaetirk.efd.lead.model.Currency {
 +  USD
 +  EUR
 +  GBP
 - String abbreviation
-+ String getAbbreviation()
 }
-
 
 
 
