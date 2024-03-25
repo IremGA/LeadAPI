@@ -38,7 +38,7 @@ public class LeadResourceTest {
 
     }
 /*
-     TO-DO Commented out because I got failure when I do mvn test, but with IntelliJ IDE tests are successfully running
+     TO-DO Since this is first time for me working with quarkus io, I searched but could not find a proper solution about  how to execute tests with a single thread for each test class. When I individually run the resourceTest class all the tests are running in order and passing but when I do mvn tests are failing because they are randomly running.
     please remove comments when you want to run TestClass
     I checked application configuration of quarkus test but couldn't find any solution about making test isolated and thread safety
     */

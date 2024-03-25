@@ -107,12 +107,6 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.javafaker</groupId>
-      <artifactId>javafaker</artifactId>
-      <version>1.0.2</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>org.jetbrains</groupId>
       <artifactId>annotations</artifactId>
     </dependency>
@@ -124,6 +118,13 @@
       <artifactId>quarkus-smallrye-fault-tolerance</artifactId>
     </dependency>
     <!-- End of Resilient Dependency-->
+
+    <!-- Start of Docker extension for deployment-->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-container-image-docker</artifactId>
+    </dependency>
+    <!-- End of Docker extension for deployment-->
 
   </dependencies>
   <build>

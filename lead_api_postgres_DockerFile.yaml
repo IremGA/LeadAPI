@@ -1,0 +1,16 @@
+version: "3"
+services:
+  lead_db:
+    image: "postgres:14"
+    container_name: "lead_db"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=lead_db
+      - POSTGRES_USER=lead
+      - POSTGRES_PASSWORD=leadpw
+  lead_api:
+    image: "iremaktas/efd.task.lead:1.0.0-SNAPSHOT"
+    container_name: "lead_api"
+    ports:
+      - "8082:8082"
