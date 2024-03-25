@@ -80,33 +80,33 @@ public class DefaultLeadService implements LeadService{
     @Override
     @Transactional
     public void updateLead(Lead lead, Long id) throws LeadAPIException {
-        try{
-            if(id == null){
-                throw new LeadAPIException(String.valueOf(Response.Status.BAD_REQUEST), LeadAPIConstant.ERROR_LEAD_ID_MISSING, LeadAPIConstant.ERROR_LEAD_ID_MISSING_REASON, LeadAPIConstant.UPDATE_LEAD_OPERATION,Response.Status.BAD_REQUEST);
+        try {
+            if (id == null) {
+                throw new LeadAPIException(String.valueOf(Response.Status.BAD_REQUEST), LeadAPIConstant.ERROR_LEAD_ID_MISSING, LeadAPIConstant.ERROR_LEAD_ID_MISSING_REASON, LeadAPIConstant.UPDATE_LEAD_OPERATION, Response.Status.BAD_REQUEST);
             }
             Lead persistedLead = leadRepository.findById(id);
             //update lead
             mapper.applyPatch(persistedLead, lead);
             entityManager.merge(persistedLead);
             //update lead Offer
-            updateLeadOffer(lead,persistedLead);
+            updateLeadOffer(lead, persistedLead);
             //update lead device specification
-            updateLeadDeviceSpecification(lead,persistedLead);
-        }catch (LeadAPIException leadAPIException){
+            updateLeadDeviceSpecification(lead, persistedLead);
+        } catch (LeadAPIException leadAPIException) {
             LOG.error("Error occurred ", leadAPIException.getMessage(), leadAPIException);
-            try{
+            try {
                 entityManager.getTransaction().rollback();
-            }catch(Exception exception){
+            } catch (Exception exception) {
                 LOG.error("Exception Thrown in Rollback Transaction", exception.getMessage(), exception);
                 throw leadAPIException;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             LOG.error("Error occurred ", e.getMessage(), e);
-            try{
+            try {
                 entityManager.getTransaction().rollback();
-            }catch (Exception exception){
+            } catch (Exception exception) {
                 LOG.error("Exception Thrown in Rollback Transaction", exception.getMessage(), exception);
-                throw new LeadAPIException(Response.Status.INTERNAL_SERVER_ERROR.toString(),LeadAPIConstant.ERROR_WHILE_UPDATE_LEAD, e.getMessage(), LeadAPIConstant.UPDATE_LEAD_OPERATION, Response.Status.INTERNAL_SERVER_ERROR);
+                throw new LeadAPIException(Response.Status.INTERNAL_SERVER_ERROR.toString(), LeadAPIConstant.ERROR_WHILE_UPDATE_LEAD, e.getMessage(), LeadAPIConstant.UPDATE_LEAD_OPERATION, Response.Status.INTERNAL_SERVER_ERROR);
             }
         }
     }
@@ -165,3 +165,4 @@ public class DefaultLeadService implements LeadService{
     }
 
 }
+

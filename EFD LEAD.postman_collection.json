@@ -277,6 +277,52 @@
 					],
 					"cookie": [],
 					"body": null
+				},
+				{
+					"name": "Error Message After Updating Lead",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\": \"XXX\",\n    \"respondBefore\": \"2024-04-23T14:50:04.437216Z\",\n    \"leadOfferList\": [\n        {   \"id\": 1,\n            \"priceAmount\": 56000.00,\n            \"car\": {\n                \"model\": \"BMW_X4\"\n            }\n        }\n    ],\n    \"leadDeviceSpecificationList\": [\n            {\n                \"comment\": \"Leather, color black\"\n            }\n        ]\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/efd/api/v1/lead/{{lead_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"efd",
+								"api",
+								"v1",
+								"lead",
+								"{{lead_id}}"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "content-length",
+							"value": "229"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"Lead_API_Error_Message\": \"No Device Specification ID Found\",\n    \"Lead_API_Error_Reason\": \"Lead Device Specification ID must be defined in the update Request\",\n    \"Lead_API_HttpStatusCode\": \"Bad Request\",\n    \"Lead_API_Operation\": \"Update Lead\"\n}"
 				}
 			]
 		},
