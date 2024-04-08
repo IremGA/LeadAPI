@@ -1,0 +1,24 @@
+@startuml
+class org.eaetirk.efd.lead.resource.MockDataGeneratorResource {
+~ LeadRepository leadRepository
++ Response generateMockData()
+}
+
+
+class org.eaetirk.efd.lead.resource.LeadResource {
+~ LeadService leadService
+- {static} Logger LOG
+~ ApplicationExceptionMapper applicationExceptionMapper
++ Response findLeadById(Long)
++ List<Lead> listLeads(String,String)
++ List<Lead> listLeadsContains(String,String)
++ Response createLead(Lead,UriInfo)
++ Response updateLead(Long,Lead)
++ void deleteLead(Long)
++ Response createLeadFallBack(Lead,UriInfo)
++ Response updateLeadFallBack(Long,Lead)
+- void saveFailedRequest(Lead,String)
+}
+
+
+@enduml

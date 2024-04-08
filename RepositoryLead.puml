@@ -1,0 +1,20 @@
+@startuml
+class org.eaetirk.efd.lead.repository.LeadRepository {
++ List<Lead> findLeadByFirstName(String)
++ List<Lead> findLeadByLastName(String)
++ List<Lead> findLeadByFirstNameAndLastName(String,String)
++ List<Lead> findLeadContainFirstName(String)
++ List<Lead> findLeadContainLastName(String)
++ List<Lead> findLeadContainFirstORLastName(String,String)
+}
+
+class org.eaetirk.efd.lead.repository.LeadOfferRepository {
+}
+class org.eaetirk.efd.lead.repository.LeadDeviceSpecificationRepository {
+}
+
+
+io.quarkus.hibernate.orm.panache.PanacheRepository <|.. org.eaetirk.efd.lead.repository.LeadRepository
+io.quarkus.hibernate.orm.panache.PanacheRepository <|.. org.eaetirk.efd.lead.repository.LeadOfferRepository
+io.quarkus.hibernate.orm.panache.PanacheRepository <|.. org.eaetirk.efd.lead.repository.LeadDeviceSpecificationRepository
+@enduml

@@ -3,6 +3,7 @@ package org.eaetirk.efd.lead.model;
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Schema(description = "Lead contains lead info along with suggested device offers and desired device specifications by the Lead")
 @Getter
 @Entity
+@NoArgsConstructor
 public class Lead {
 
     @Id
@@ -116,7 +118,5 @@ public class Lead {
         }
         leadOfferList.add(leadOffer);
         leadOffer.setLead(this);
-    }
-    public Lead() {
     }
 }

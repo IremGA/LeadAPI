@@ -161,7 +161,8 @@
 						"exec": [
 							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -170,7 +171,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"comment\": \"XXX\",\n    \"respondBefore\": \"2024-04-23T14:50:04.437216Z\",\n    \"leadOfferList\": [\n        {   \"id\": 1,\n            \"priceAmount\": 56000.00,\n            \"car\": {\n                \"model\": \"BMW_X4\"\n            }\n        }\n    ],\n    \"leadDeviceSpecificationList\": [\n            {\n                \"comment\": \"Leather, color black\",\n                \"id\": 1\n            }\n        ]\n    \n}",
+					"raw": "{\n    \"comment\": \"XXX\",\n    \"respondBefore\": \"2024-04-23T14:50:04.437216Z\",\n    \"leadOfferList\": [\n        {   \"id\":1,\n            \"priceAmount\": 56000.00,\n            \"car\": {\n                \"model\": \"BMW_X4\"\n            }\n        }\n    ],\n    \"leadDeviceSpecificationList\": [\n            {\n                \"comment\": \"Leather, color gray\",\n                \"id\": 1\n            }\n        ]\n    \n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -178,7 +179,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/efd/api/v1/lead/{{lead_id}}",
+					"raw": "http://localhost:8082/efd/api/v1/lead/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -189,7 +190,7 @@
 						"api",
 						"v1",
 						"lead",
-						"{{lead_id}}"
+						"1"
 					]
 				}
 			},
@@ -932,43 +933,6 @@
 						"v1",
 						"lead",
 						"{{lead_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Generate Mock Data",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status Conde Should be 200\", function () {",
-							"    pm.response.to.have.status(200)",
-							"})",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8082/efd/api/v1/mock-data/generate",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8082",
-					"path": [
-						"efd",
-						"api",
-						"v1",
-						"mock-data",
-						"generate"
 					]
 				}
 			},

@@ -101,6 +101,7 @@ public class DefaultLeadService implements LeadService{
                 throw leadAPIException;
             }
         } catch (Exception e) {
+            //OptimisticLock exception may be thrown
             LOG.error("Error occurred ", e.getMessage(), e);
             try {
                 entityManager.getTransaction().rollback();

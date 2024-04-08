@@ -13,10 +13,6 @@ import java.math.BigInteger;
 @NoArgsConstructor
 public class Car extends Device{
 
-    @Id
-    @GeneratedValue
-    Long id;
-
     BigInteger kilometer;
 
     public Car(String model, String brand, String year, String style, String location,BigInteger kilometer) {
