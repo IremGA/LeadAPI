@@ -20,6 +20,4 @@ public class Car extends Vehicle {
         this.kilometer = kilometer;
     }
 
-
-
 }
