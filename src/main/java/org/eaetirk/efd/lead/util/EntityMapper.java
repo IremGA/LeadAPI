@@ -1,6 +1,7 @@
 package org.eaetirk.efd.lead.util;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import org.eaetirk.efd.lead.constant.LeadAPIConstant;
 import org.eaetirk.efd.lead.exception.LeadAPIException;
 import org.eaetirk.efd.lead.model.*;
 
@@ -13,13 +14,13 @@ public class EntityMapper {
         }
 
         switch (existingEntity.getClass().getSimpleName()) {
-            case "Lead":
+            case LeadAPIConstant.CLASS_TYPE_LEAD:
                 applyLeadPatch((Lead) existingEntity, (Lead) patchedEntity);
                 break;
-            case "LeadOffer":
+            case LeadAPIConstant.CLASS_TYPE_LEAD_OFFER:
                 applyLeadOfferPatch((LeadOffer) existingEntity, (LeadOffer) patchedEntity);
                 break;
-            case "LeadDeviceSpecification":
+            case LeadAPIConstant.CLASS_TYPE_LEAD_DEVICE_SPEC:
                 applyLeadDeviceSpecificationPatch((LeadDeviceSpecification) existingEntity, (LeadDeviceSpecification) patchedEntity);
                 break;
             default:

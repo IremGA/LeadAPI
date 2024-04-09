@@ -29,4 +29,9 @@ public class LeadAPIConstant {
 
     public static final String CREATE_FALLBACK_OPERATION = "CREATE_FALLBACK_OPERATION";
     public static final String UPDATE_FALLBACK_OPERATION = "UPDATE_FALLBACK_OPERATION";
+
+    public static final String CLASS_TYPE_LEAD = "Lead";
+    public static final String CLASS_TYPE_LEAD_OFFER = "LeadOffer";
+    public static final String CLASS_TYPE_LEAD_DEVICE_SPEC = "LeadDeviceSpecification";
+
 }
