@@ -11,7 +11,7 @@ import java.math.BigInteger;
 @Setter
 @Entity
 @NoArgsConstructor
-public class Car extends Device{
+public class Car extends Vehicle {
 
     BigInteger kilometer;
 

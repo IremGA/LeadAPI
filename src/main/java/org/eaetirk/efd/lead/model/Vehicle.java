@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @MappedSuperclass
-public class Device {
+public abstract class Vehicle {
 
     @Id
     @GeneratedValue
@@ -22,7 +22,7 @@ public class Device {
     String style;
     String location;
 
-    public Device(String model, String brand, String creation_year, String style, String location) {
+    public Vehicle(String model, String brand, String creation_year, String style, String location) {
 
         this.model = model;
         this.brand = brand;
