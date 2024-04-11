@@ -30,7 +30,6 @@ public class LeadOffer {
 
     @JoinColumn(name = "lead_id_fk")
     @ManyToOne(cascade = CascadeType.ALL)
-    @Setter
     @JsonbTransient
     private Lead lead;
 
@@ -38,7 +37,6 @@ public class LeadOffer {
     @GeneratedValue
     private Long id;
 
-    @Setter
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;

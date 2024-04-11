@@ -94,7 +94,6 @@ public class Lead {
         this.leadStatus = leadStatus;
         this.comment = comment;
     }
-
     public void setLeadOfferList(List<LeadOffer> leadOfferList) {
         if(leadOfferList == null){
             leadOfferList =new ArrayList<>();
@@ -111,19 +110,4 @@ public class Lead {
         leadDeviceSpecificationList.forEach(leadDeviceSpecification -> leadDeviceSpecification.setLead(this));
     }
 
-    public void addLeadDeviceSpecification(LeadDeviceSpecification leadDeviceSpecification){
-        if(leadDeviceSpecificationList == null){
-            leadDeviceSpecificationList = new ArrayList<>();
-        }
-        leadDeviceSpecificationList.add(leadDeviceSpecification);
-        leadDeviceSpecification.setLead(this);
-    }
-
-    public void addLeadOffer(LeadOffer leadOffer){
-        if(leadOfferList == null){
-            leadOfferList = new ArrayList<>();
-        }
-        leadOfferList.add(leadOffer);
-        leadOffer.setLead(this);
-    }
 }

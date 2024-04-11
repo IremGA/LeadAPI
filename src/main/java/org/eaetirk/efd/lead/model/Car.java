@@ -9,8 +9,8 @@ import java.math.BigInteger;
 
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
+@Entity
 public class Car extends Vehicle {
 
     BigInteger kilometer;
