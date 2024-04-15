@@ -3,7 +3,10 @@ package org.eaetirk.efd.lead.util;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eaetirk.efd.lead.constant.LeadAPIConstant;
 import org.eaetirk.efd.lead.exception.LeadAPIException;
-import org.eaetirk.efd.lead.model.*;
+import org.eaetirk.efd.lead.model.Car;
+import org.eaetirk.efd.lead.model.Lead;
+import org.eaetirk.efd.lead.model.LeadDeviceSpecification;
+import org.eaetirk.efd.lead.model.LeadOffer;
 
 @ApplicationScoped
 public class EntityMapper {

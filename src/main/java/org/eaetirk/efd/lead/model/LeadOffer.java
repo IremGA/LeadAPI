@@ -1,6 +1,5 @@
 package org.eaetirk.efd.lead.model;
 
-import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,7 +29,6 @@ public class LeadOffer {
 
     @JoinColumn(name = "lead_id_fk")
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonbTransient
     private Lead lead;
 
     @Id

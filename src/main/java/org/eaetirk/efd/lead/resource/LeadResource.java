@@ -21,7 +21,7 @@ import jakarta.ws.rs.core.UriInfo;
 import org.eaetirk.efd.lead.constant.LeadAPIConstant;
 import org.eaetirk.efd.lead.exception.ApplicationExceptionMapper;
 import org.eaetirk.efd.lead.exception.LeadAPIException;
-import org.eaetirk.efd.lead.model.Lead;
+import org.eaetirk.efd.lead.model.dto.LeadDTO;
 import org.eaetirk.efd.lead.service.LeadService;
 import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.faulttolerance.Retry;
@@ -61,7 +61,7 @@ public class LeadResource {
     public Response findLeadById(@PathParam("id") Long id){
         LOG.info("GET Lead Operation is Called");
         try{
-            Lead lead = leadService.findLeadById(id);
+            LeadDTO lead = leadService.findLeadById(id);
             return Response.ok(lead).build();
         }catch(LeadAPIException apiException){
             LOG.error("Error occurred: {} ", apiException.getMessage(), apiException);
@@ -81,7 +81,7 @@ public class LeadResource {
             description = "This API retrieves leads specified exact query params as first_name,  last_name or both (by ignoring case). " +
                     "When there is no data found with specified query params, returns all leads in repository."
     )
-    public List<Lead> listLeads(@QueryParam("first_name") String firstName,
+    public List<LeadDTO> listLeads(@QueryParam("first_name") String firstName,
                                 @QueryParam("last_name") String lastName){
         LOG.info("LIST Leads Operation is Called");
         return  leadService.searchLeadByFirstNameLastName(firstName,lastName );
@@ -94,7 +94,7 @@ public class LeadResource {
             description = "This API retrieves leads containing specified query params first_name,  last_name or both " +
                     "When there is no data found with specified query params, returns null list."
     )
-    public List<Lead> listLeadsContains(@QueryParam("first_name") String firstName,
+    public List<LeadDTO> listLeadsContains(@QueryParam("first_name") String firstName,
                                 @QueryParam("last_name") String lastName){
         LOG.info("LIST Leads Contains Operation is Called");
         return  leadService.searchLeadContainsFirstNameLastName(firstName,lastName );
@@ -109,12 +109,12 @@ public class LeadResource {
     @APIResponse(responseCode = "201", description = "Lead created successfully")
     @Retry(maxRetries = 4, delay = 5000)
     @Fallback(fallbackMethod = "createLeadFallBack")
-    public Response createLead(Lead lead, @Context UriInfo uriInfo){
+    public Response createLead(LeadDTO lead, @Context UriInfo uriInfo){
         try{
             LOG.info("Create Lead Operation is Called");
-            leadService.createLead(lead);
-            Lead persistedLead = leadService.findLeadById(lead.getId());
-            UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder().path(Long.toString(lead.getId()));
+            LeadDTO leadDTO = leadService.createLead(lead);
+            LeadDTO persistedLead = leadService.findLeadById(leadDTO.id());
+            UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder().path(Long.toString(leadDTO.id()));
             return Response.created(uriBuilder.build()).entity(persistedLead).build();
         }catch (PropertyValueException valueException){
             LeadAPIException leadAPIException = new LeadAPIException(Response.Status.BAD_REQUEST.toString(), "Invalid Request Value","Invalid Request Json",LeadAPIConstant.CREATE_LEAD_OPERATION, Response.Status.BAD_REQUEST);
@@ -138,7 +138,7 @@ public class LeadResource {
     @Retry(maxRetries = 4, delay = 5000)
     @Fallback(fallbackMethod = "updateLeadFallBack")
     @Path("/{id}")
-    public Response updateLead(@PathParam("id") Long id,Lead lead){
+    public Response updateLead(@PathParam("id") Long id,LeadDTO lead){
 
         try{
             LOG.info("Update Lead Called ");
@@ -175,7 +175,7 @@ public class LeadResource {
 
 
     //FallBack Methods
-    public Response createLeadFallBack(Lead lead, UriInfo uriInfo) {
+    public Response createLeadFallBack(LeadDTO lead, UriInfo uriInfo) {
         try {
             LOG.info("Create Lead FallBack Operation is Called");
             saveFailedRequest(lead, "createLeadRequestFallBack");
@@ -188,7 +188,7 @@ public class LeadResource {
         }
     }
 
-    public Response updateLeadFallBack(Long id,Lead lead){
+    public Response updateLeadFallBack(Long id,LeadDTO lead){
 
         try{
             LOG.info("Update Lead FallBack Operation is Called");
@@ -205,7 +205,7 @@ public class LeadResource {
 
     }
 
-    private void saveFailedRequest(Lead lead, String fileName) {
+    private void saveFailedRequest(LeadDTO lead, String fileName) {
 
         try {
             String leadJSON = JsonbBuilder.create().toJson(lead);

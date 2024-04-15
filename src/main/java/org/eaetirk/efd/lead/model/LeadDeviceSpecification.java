@@ -1,6 +1,5 @@
 package org.eaetirk.efd.lead.model;
 
-import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -27,7 +26,6 @@ public class LeadDeviceSpecification {
 
     @JoinColumn(name = "lead_id_fk")
     @ManyToOne
-    @JsonbTransient
     private Lead lead;
 
     @Id

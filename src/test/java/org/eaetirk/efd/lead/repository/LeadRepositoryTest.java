@@ -30,7 +30,7 @@ public class LeadRepositoryTest {
         int listAllSize = leadRepository.listAll().size();
 
         assertEquals(count, listAllSize);
-        Lead lead = new Lead("Irem", "Aktas", "SW_Engineer", "iremgamzeli@gmail.com", PaymentPlan.BANK_TRANSFER,threeDaysLater, LeadStatus.ACTIVE,"new Lead Created");
+        Lead lead = new Lead("Irem", "Aktas", "SW_Engineer", "iremgamzeli@gmail.com", PaymentPlan.BANK_TRANSFER,threeDaysLater, LeadStatus.ACTIVE,"new Lead Created", Instant.now());
 
         leadRepository.persist(lead);
 

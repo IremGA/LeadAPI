@@ -34,4 +34,14 @@ public class LeadAPIConstant {
     public static final String CLASS_TYPE_LEAD_OFFER = "LeadOffer";
     public static final String CLASS_TYPE_LEAD_DEVICE_SPEC = "LeadDeviceSpecification";
 
+    public static final String ZONE_ID_ISTANBUL = "Europe/Istanbul";
+    public static final String ZONE_ID_CHICAGO = "America/Chicago";
+    public static final String ZONE_ID_TOKYO= "Asia/Tokyo";
+    public static final String ZONE_ID_ZAGREB= "Europe/Zagreb";
+
+    public static final String DateTimeFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+
+
+
+
 }

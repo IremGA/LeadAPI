@@ -12,14 +12,17 @@ import org.eaetirk.efd.lead.exception.LeadAPIException;
 import org.eaetirk.efd.lead.model.Lead;
 import org.eaetirk.efd.lead.model.LeadDeviceSpecification;
 import org.eaetirk.efd.lead.model.LeadOffer;
+import org.eaetirk.efd.lead.model.dto.LeadDTO;
 import org.eaetirk.efd.lead.repository.LeadRepository;
 import org.eaetirk.efd.lead.resource.LeadResource;
+import org.eaetirk.efd.lead.util.DTOMapper;
 import org.eaetirk.efd.lead.util.EntityMapper;
 import org.jboss.logging.Logger;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class DefaultLeadService implements LeadService{
@@ -30,45 +33,59 @@ public class DefaultLeadService implements LeadService{
     LeadRepository leadRepository;
 
     @Inject
+    DTOMapper dtoMapper;
+
+    @Inject
     EntityManager entityManager;
 
     private static final Logger LOG = Logger.getLogger(LeadResource.class);
     @Override
-    public List<Lead> getLeads() throws LeadAPIException{
-        return leadRepository.listAll(Sort.by("lastName"));
+    public List<LeadDTO> getLeads() throws LeadAPIException{
+        return leadRepository.listAll(Sort.by("lastName")).stream()
+                .map(leader -> dtoMapper.mapLeadDTO(leader)).collect(Collectors.toList());
     }
 
     @Override
-    public Lead findLeadById(Long id) throws NotFoundException, LeadAPIException{
+    public LeadDTO findLeadById(Long id) throws NotFoundException, LeadAPIException{
         if(id == null ){
             throw new LeadAPIException(String.valueOf(Response.Status.BAD_REQUEST), LeadAPIConstant.ERROR_LEAD_ID_MISSING, LeadAPIConstant.ERROR_LEAD_ID_MISSING_REASON, LeadAPIConstant.GET_LEAD_OPERATION,Response.Status.BAD_REQUEST);
         }
-        return leadRepository.findByIdOptional(id).orElseThrow(NotFoundException::new);
+        Lead lead = leadRepository.findByIdOptional(id).orElseThrow(NotFoundException::new);
+
+        return dtoMapper.mapLeadDTO(lead);
     }
 
     @Override
-    public List<Lead> searchLeadByFirstNameLastName(String firstName, String lastName) {
+    public List<LeadDTO> searchLeadByFirstNameLastName(String firstName, String lastName) {
         return switch (getSearchCriteria(firstName, lastName)) {
-            case BOTH -> leadRepository.findLeadByFirstNameAndLastName(firstName, lastName);
-            case FIRST_NAME_ONLY -> leadRepository.findLeadByFirstName(firstName);
-            case LAST_NAME_ONLY -> leadRepository.findLeadByLastName(lastName);
+            case BOTH -> leadRepository.findLeadByFirstNameAndLastName(firstName, lastName).stream()
+                    .map(leader ->dtoMapper.mapLeadDTO(leader)).collect(Collectors.toList());
+            case FIRST_NAME_ONLY -> leadRepository.findLeadByFirstName(firstName).stream()
+                    .map(leader->dtoMapper.mapLeadDTO(leader)).collect(Collectors.toList());
+            case LAST_NAME_ONLY -> leadRepository.findLeadByLastName(lastName).stream()
+                    .map(leader->dtoMapper.mapLeadDTO(leader)).collect(Collectors.toList());
             default -> getLeads();
         };
     }
 
     @Override
-    public List<Lead> searchLeadContainsFirstNameLastName(String firstName, String lastName) {
+    public List<LeadDTO> searchLeadContainsFirstNameLastName(String firstName, String lastName) {
         return switch (getSearchCriteria(firstName, lastName)) {
-            case BOTH -> leadRepository.findLeadContainFirstORLastName(firstName, lastName);
-            case FIRST_NAME_ONLY -> leadRepository.findLeadContainFirstName(firstName);
-            case LAST_NAME_ONLY -> leadRepository.findLeadContainLastName(lastName);
+            case BOTH -> leadRepository.findLeadContainFirstORLastName(firstName, lastName).stream()
+                    .map(lead -> dtoMapper.mapLeadDTO(lead)).collect(Collectors.toList());
+            case FIRST_NAME_ONLY -> leadRepository.findLeadContainFirstName(firstName).stream()
+                    .map(lead -> dtoMapper.mapLeadDTO(lead)).collect(Collectors.toList());
+            case LAST_NAME_ONLY -> leadRepository.findLeadContainLastName(lastName).stream()
+                    .map(lead -> dtoMapper.mapLeadDTO(lead)).collect(Collectors.toList());
             default -> null;
         };
     }
 
     @Override
-    public void createLead(Lead lead) throws LeadAPIException{
-         leadRepository.persist(lead);
+    public LeadDTO createLead(LeadDTO lead) throws LeadAPIException{
+        Lead p_lead = dtoMapper.mapToLead(lead);
+        leadRepository.persist(p_lead);
+        return dtoMapper.mapLeadDTO(p_lead);
     }
 
     @Override
@@ -79,19 +96,19 @@ public class DefaultLeadService implements LeadService{
 
     @Override
     @Transactional
-    public void updateLead(Lead lead, Long id) throws LeadAPIException {
+    public void updateLead(LeadDTO lead, Long id) throws LeadAPIException {
         try {
             if (id == null) {
                 throw new LeadAPIException(String.valueOf(Response.Status.BAD_REQUEST), LeadAPIConstant.ERROR_LEAD_ID_MISSING, LeadAPIConstant.ERROR_LEAD_ID_MISSING_REASON, LeadAPIConstant.UPDATE_LEAD_OPERATION, Response.Status.BAD_REQUEST);
             }
             Lead persistedLead = leadRepository.findById(id);
             //update lead
-            mapper.applyPatch(persistedLead, lead);
+            mapper.applyPatch(persistedLead, dtoMapper.mapToLead(lead));
             entityManager.merge(persistedLead);
             //update lead Offer
-            updateLeadOffer(lead, persistedLead);
+            updateLeadOffer(dtoMapper.mapToLead(lead), persistedLead);
             //update lead device specification
-            updateLeadDeviceSpecification(lead, persistedLead);
+            updateLeadDeviceSpecification(dtoMapper.mapToLead(lead), persistedLead);
         } catch (LeadAPIException leadAPIException) {
             LOG.error("Error occurred ", leadAPIException.getMessage(), leadAPIException);
             try {
