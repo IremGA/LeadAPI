@@ -12,6 +12,10 @@ import org.eaetirk.efd.lead.model.LeadOffer;
 public class EntityMapper {
 
     public <T> void applyPatch(T existingEntity, T patchedEntity) {
+
+        if (existingEntity == null) {
+            throw new LeadAPIException("Lead to be updated not found!");
+        }
         if (existingEntity.getClass() != patchedEntity.getClass()) {
             throw new LeadAPIException("Entities must be same");
         }

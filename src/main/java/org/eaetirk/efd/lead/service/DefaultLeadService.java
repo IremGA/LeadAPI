@@ -19,6 +19,7 @@ import org.eaetirk.efd.lead.util.DTOMapper;
 import org.eaetirk.efd.lead.util.EntityMapper;
 import org.jboss.logging.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -151,6 +152,10 @@ public class DefaultLeadService implements LeadService{
             for (LeadOffer offer : lead.getLeadOfferList()) {
                 if(offer.getId() == null ){
                     throw new LeadAPIException(Response.Status.BAD_REQUEST.toString(), LeadAPIConstant.ERROR_NO_LEAD_OFFER_ID_FOUND,LeadAPIConstant.ERROR_NO_LEAD_OFFER_ID_FOUND_REASON, LeadAPIConstant.UPDATE_LEAD_OPERATION, Response.Status.BAD_REQUEST);
+                }
+
+                if(persistedLead.getLeadOfferList() == null){
+                    persistedLead.setLeadOfferList(new ArrayList<>());
                 }
                 Optional<LeadOffer> leadOffer = persistedLead.getLeadOfferList().stream().filter(p_offer -> Objects.equals(p_offer.getId(), offer.getId())).findFirst();
                 if (leadOffer.isPresent()) {

@@ -53,4 +53,11 @@ public class LeadAPITestConstants {
                     ]
             }
             """;
+
+    public static final String REQUEST_UPDATE_LEAD_SHORT = """
+            {
+                "comment": "BBB"
+
+            }
+            """;
 }
