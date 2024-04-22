@@ -36,6 +36,13 @@
     </dependency>
     <!-- End of Documentation Related Dependencies-->
 
+    <!-- Start of Authentication Related Dependencies-->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-oidc</artifactId>
+    </dependency>
+    <!-- End of Authentication Related Dependencies-->
+
     <!-- Start of RestEasy Related Dependencies-->
     <dependency>
       <groupId>io.quarkus</groupId>

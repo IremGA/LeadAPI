@@ -1,5 +1,6 @@
 package org.eaetirk.efd.lead.resource;
 
+import io.quarkus.oidc.OIDCException;
 import io.quarkus.security.Authenticated;
 import io.quarkus.security.UnauthorizedException;
 import jakarta.inject.Inject;
@@ -110,7 +111,7 @@ public class LeadResource {
             summary = "Creates a Lead"
     )
     @APIResponse(responseCode = "201", description = "Lead created successfully")
-    @Retry(retryOn = {UnauthorizedException.class, NotFoundException.class},maxRetries = 4, delay = 5000)
+    @Retry(retryOn = {UnauthorizedException.class, NotFoundException.class, OIDCException.class},maxRetries = 4, delay = 5000)
     @Fallback(fallbackMethod = "createLeadFallBack")
     public Response createLead(LeadDTO lead, @Context UriInfo uriInfo){
         try{
