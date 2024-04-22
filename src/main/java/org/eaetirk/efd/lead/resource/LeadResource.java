@@ -3,6 +3,8 @@ package org.eaetirk.efd.lead.resource;
 import io.quarkus.oidc.OIDCException;
 import io.quarkus.security.Authenticated;
 import io.quarkus.security.UnauthorizedException;
+
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.transaction.Transactional;
@@ -113,6 +115,7 @@ public class LeadResource {
     @APIResponse(responseCode = "201", description = "Lead created successfully")
     @Retry(retryOn = {UnauthorizedException.class, NotFoundException.class, OIDCException.class},maxRetries = 4, delay = 5000)
     @Fallback(fallbackMethod = "createLeadFallBack")
+    @RolesAllowed("lead-admin")
     public Response createLead(LeadDTO lead, @Context UriInfo uriInfo){
         try{
             LOG.info("Create Lead Operation is Called");
@@ -142,6 +145,7 @@ public class LeadResource {
     @Retry(maxRetries = 4, delay = 5000)
     @Fallback(fallbackMethod = "updateLeadFallBack")
     @Path("/{id}")
+    @RolesAllowed("lead-admin")
     public Response updateLead(@PathParam("id") Long id,LeadDTO lead){
 
         try{
@@ -172,6 +176,7 @@ public class LeadResource {
     @Operation(
             summary = "Deletes a Lead by ID"
     )
+    @RolesAllowed("lead-admin")
     public void deleteLead(@PathParam("id") Long id){
         LOG.info("Delete Lead Called ");
         leadService.deleteLead(id);
